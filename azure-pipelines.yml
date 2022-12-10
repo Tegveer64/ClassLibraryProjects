@@ -1,5 +1,6 @@
 # ASP.NET
 
+
 # Build and test ASP.NET projects.
 # Add steps that publish symbols, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
@@ -40,3 +41,9 @@ steps:
     packagesToPack: '**/*.csproj'
     versioningScheme: 'off'
 
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '364728d7-f6de-4a0a-a41d-cc3d552c34e8/4f5bbfc4-98d2-4f36-83fd-3003afa7c531'
